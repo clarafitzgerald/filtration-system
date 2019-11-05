@@ -1,3 +1,29 @@
-.test {
-  color: red;
+.articleBody {
+  background-color: bisque;
+}
+
+.articleBody {
+  border: 1px dashed black;
+  margin: 10px;
+  padding: 5px;
+}
+
+.text {
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 5px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.author,
+.date {
+  font-size: 12px;
+  color: rebeccapurple;
+  margin: 5px;
 }

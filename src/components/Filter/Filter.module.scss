@@ -1,0 +1,31 @@
+.filterGerman {
+  background-color: paleturquoise;
+}
+
+.filterPolish {
+  background-color: palevioletred;
+}
+
+.filterWelsh {
+  background-color: palegreen;
+}
+
+.filterAll {
+  background-color: grey;
+}
+
+.filterGerman,
+.filterPolish,
+.filterWelsh,
+.filterAll {
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+}
+
+.filterButton {
+  padding: 5px;
+  margin: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}

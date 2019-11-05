@@ -1,6 +1,7 @@
 import React from "react";
 // import styles from "./App.module.scss";
 import Article from "../../components/Article/Article";
+import Filter from "../../components/Filter/Filter";
 import { firestore } from "../../firebase";
 
 class App extends React.Component {
@@ -23,8 +24,8 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Article />
         <main>
+          <Filter />
           {this.state.articles.map((language, index) => (
             <Article articleData={language} key={index} />
           ))}
