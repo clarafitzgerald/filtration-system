@@ -6,8 +6,16 @@ import { firestore } from "../../firebase";
 
 class App extends React.Component {
   state = {
-    articles: []
+    articles: [],
+    filter: ""
   };
+
+  updateState = filterVal => {
+    this.setState({
+      filter: filterVal
+    });
+  };
+
   componentDidMount() {
     firestore
       .collection("articles")
@@ -22,11 +30,14 @@ class App extends React.Component {
       });
   }
   render() {
+    let newArray = this.state.articles.filter(language => {
+      return language.filter === this.state.filter;
+    });
     return (
       <>
         <main>
-          <Filter />
-          {this.state.articles.map((language, index) => (
+          <Filter filterAction={this.updateState} />
+          {newArray.map((language, index) => (
             <Article articleData={language} key={index} />
           ))}
         </main>

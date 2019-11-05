@@ -3,16 +3,14 @@ import styles from "./Article.module.scss";
 import PropTypes from "prop-types";
 
 class Article extends Component {
-  
   state = { isFiltered: false };
 
-  handleClick = () => {
-    this.setState({
-      isFiltered: !this.state.isFiltered
-    });
+  // handleClick = () => {
+  //   this.setState({
+  //     isFiltered: !this.state.isFiltered
+  //   });
 
   render() {
-    console.log(this.props.articleData);
     return (
       <section className={styles.articleBody}>
         <article className={styles.text}>
