@@ -51,6 +51,9 @@ class App extends React.Component {
     return (
       <>
         <main>
+          <button className={styles.selectAll} onClick={clicky}>
+            BIG BOI
+          </button>
           <section className={styles.filterButtons}>
             {filters.map((item, index) => (
               <Filter
@@ -59,9 +62,7 @@ class App extends React.Component {
                 key={index}
               />
             ))}
-            <button className={styles.selectAll} onClick={clicky}>
-              BIG BOI
-            </button>
+
             {/* <button onClick={this.updateState({ filters })}></button> */}
           </section>
           {newArray.map((language, index) => (
