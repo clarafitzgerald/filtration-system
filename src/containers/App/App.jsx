@@ -12,7 +12,9 @@ class App extends React.Component {
 
   updateState = filterVal => {
     this.setState({
-      filter: filterVal
+      filter: this.state.filter.includes(filterVal)
+        ? this.state.filter.filter(item => item !== filterVal)
+        : this.state.filter.concat(filterVal)
     });
   };
 
