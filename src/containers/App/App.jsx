@@ -3,6 +3,7 @@ import styles from "./App.module.scss";
 import Article from "../../components/Article/Article";
 import Filter from "../../components/Filter/Filter";
 import { firestore } from "../../firebase";
+import Form from "../../components/Form";
 
 class App extends React.Component {
   state = {
@@ -31,6 +32,38 @@ class App extends React.Component {
         });
       });
   }
+
+  setInputText = event => {
+    const inputText = event.target.value;
+    this.setState({ inputText });
+  };
+
+  setSubmissionText = () => {
+    this.state.inputText != null
+      ? firestore
+          .collection("articles")
+          .doc()
+          .set({
+            filter: this.state.inputText
+          })
+          .then(function() {
+            console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          })
+      : console.log("insufficient data entered");
+  };
+
+  updateText = event => {
+    this.setState({ updateText: event.target.value });
+    console.log(this.state.updateText);
+  };
+
+  setUpdatedText = () => {
+    this.setState({ updatedText: this.state.updateText });
+  };
+
   render() {
     let newArray = this.state.articles.filter(language => {
       return this.state.filter.includes(language.filter);
@@ -42,7 +75,7 @@ class App extends React.Component {
         ? filters
         : filters.concat(item.filter);
     });
-    let clicky = () => {
+    let selectAll = () => {
       this.setState({
         filter: filters
       });
@@ -51,7 +84,7 @@ class App extends React.Component {
     return (
       <>
         <main>
-          <button className={styles.selectAll} onClick={clicky}>
+          <button className={styles.selectAll} onClick={selectAll}>
             BIG BOI
           </button>
           <section className={styles.filterButtons}>
@@ -65,8 +98,18 @@ class App extends React.Component {
 
             {/* <button onClick={this.updateState({ filters })}></button> */}
           </section>
+          <Form
+            updateText={this.updateText}
+            setInputText={this.setInputText}
+            setSubmissionText={this.setSubmissionText}
+            setUpdatedText={this.setUpdatedText}
+          />
           {newArray.map((language, index) => (
-            <Article articleData={language} key={index} />
+            <Article
+              updatedValue={this.state.updatedText}
+              articleData={language}
+              key={index}
+            />
           ))}
         </main>
       </>
