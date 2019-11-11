@@ -9,10 +9,10 @@ class Article extends Component {
       .collection("articles")
       .doc(this.props.articleData.docId)
       .delete()
-      .then(function() {
-        this.props.getPosts();
-        console.log("Document successfully deleted!");
-      })
+      .then(
+        this.props.getPosts(),
+        console.log("Document successfully deleted!")
+      )
       .catch(function(error) {
         console.error("Error removing document: ", error);
       });
@@ -25,10 +25,10 @@ class Article extends Component {
           .collection("articles")
           .doc(this.props.articleData.docId)
           .set({ filter: this.props.updateText })
-          .then(function() {
-            this.props.getPosts();
-            console.log("Document successfully updated!");
-          })
+          .then(
+            this.props.getPosts(),
+            console.log("Document successfully updated!")
+          )
           .catch(function(error) {
             console.error("Error updating document: ", error);
           })

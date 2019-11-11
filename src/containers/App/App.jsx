@@ -19,7 +19,7 @@ class App extends React.Component {
     });
   };
 
-  getPosts() {
+  getPosts = () => {
     firestore
       .collection("articles")
       .get()
@@ -31,20 +31,10 @@ class App extends React.Component {
           articles: articles
         });
       });
-  }
+  };
 
   componentDidMount() {
-    firestore
-      .collection("articles")
-      .get()
-      .then(querySnapshot => {
-        const articles = querySnapshot.docs.map(doc => {
-          return { ...doc.data(), docId: doc.id };
-        });
-        this.setState({
-          articles: articles
-        });
-      });
+    this.getPosts();
   }
 
   setInputText = event => {
@@ -109,15 +99,12 @@ class App extends React.Component {
                 key={index}
               />
             ))}
-
-            {/* <button onClick={this.updateState({ filters })}></button> */}
           </section>
           <Form
             updateText={this.updateText}
             setInputText={this.setInputText}
             setSubmissionText={this.setSubmissionText}
             setUpdatedText={this.setUpdatedText}
-            getPosts={this.getPosts}
           />
           {newArray.map((language, index) => (
             <Article
