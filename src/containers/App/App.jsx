@@ -19,6 +19,20 @@ class App extends React.Component {
     });
   };
 
+  getPosts() {
+    firestore
+      .collection("articles")
+      .get()
+      .then(querySnapshot => {
+        const articles = querySnapshot.docs.map(doc => {
+          return { ...doc.data(), docId: doc.id };
+        });
+        this.setState({
+          articles: articles
+        });
+      });
+  }
+
   componentDidMount() {
     firestore
       .collection("articles")
@@ -103,12 +117,15 @@ class App extends React.Component {
             setInputText={this.setInputText}
             setSubmissionText={this.setSubmissionText}
             setUpdatedText={this.setUpdatedText}
+            getPosts={this.getPosts}
           />
           {newArray.map((language, index) => (
             <Article
               updatedValue={this.state.updatedText}
               articleData={language}
               key={index}
+              updateText={this.state.updateText}
+              getPosts={this.getPosts}
             />
           ))}
         </main>

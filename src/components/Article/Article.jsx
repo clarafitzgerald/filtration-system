@@ -10,6 +10,7 @@ class Article extends Component {
       .doc(this.props.articleData.docId)
       .delete()
       .then(function() {
+        this.props.getPosts();
         console.log("Document successfully deleted!");
       })
       .catch(function(error) {
@@ -19,16 +20,19 @@ class Article extends Component {
 
   updatePost = () => {
     this.setState({ updating: true });
-    firestore
-      .collection("articles")
-      .doc(this.props.articleData.docId)
-      .set({ filter: this.props.updatedValue })
-      .then(function() {
-        console.log("Document successfully updated!");
-      })
-      .catch(function(error) {
-        console.error("Error updating document: ", error);
-      });
+    this.props.updateText != null
+      ? firestore
+          .collection("articles")
+          .doc(this.props.articleData.docId)
+          .set({ filter: this.props.updateText })
+          .then(function() {
+            this.props.getPosts();
+            console.log("Document successfully updated!");
+          })
+          .catch(function(error) {
+            console.error("Error updating document: ", error);
+          })
+      : alert("you need to enter update");
   };
 
   render() {

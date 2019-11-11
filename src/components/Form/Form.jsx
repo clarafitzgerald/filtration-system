@@ -17,7 +17,6 @@ class Form extends Component {
         <form>
           <p>update text:</p>
           <input onChange={this.props.updateText} type="text" />
-          <p onClick={this.props.setUpdatedText}> update</p>
         </form>
       </>
     );
